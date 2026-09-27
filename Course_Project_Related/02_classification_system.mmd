@@ -13,7 +13,7 @@ classDiagram
         + iter_merchant_rules()
         + find_merchant_match(text)
         + find_keyword_match(text)
-        + predict_vector(text, treshold)
+        + predict_vector(text, threshold)
     }
 
     class ClassificationHandler {
@@ -25,6 +25,11 @@ classDiagram
     }
 
     class MerchantRuleHandler {
+        - RuleIndex _index
+        # try_classify(text) ClassificationResult
+    }
+
+    class KeywordRuleHandler {
         - RuleIndex _index
         # try_classify(text) ClassificationResult
     }
@@ -42,17 +47,15 @@ classDiagram
         + manual_override(transaction_id, new_category, cleaned_desc)
     }
 
-%% Relationships
-ClassificationHandler <|-- MerchantRuleHandler : Inheritance
-ClassificationHandler <|-- KeywordRuleHandler : Inheritance
-ClassificationHandler <|-- VectorSimilarityHandler : Inheritance
+    ClassificationHandler <|-- MerchantRuleHandler : Inheritance
+    ClassificationHandler <|-- KeywordRuleHandler : Inheritance
+    ClassificationHandler <|-- VectorSimilarityHandler : Inheritance
 
-ClassificationHandler "0..1" o-- "0..1" ClassificationHandler : _next chain
-MerchantRuleHandler --> RuleIndex : uses
-KeywordRuleHandler --> RuleIndex : uses
-VectorSimilarityHandler --> RuleIndex : uses
+    ClassificationHandler "0..1" o-- "0..1" ClassificationHandler : _next chain
+    MerchantRuleHandler --> RuleIndex : uses
+    KeywordRuleHandler --> RuleIndex : uses
+    VectorSimilarityHandler --> RuleIndex : uses
 
-TransactionClassifier *-- RuleIndex : Composition
-TransactionClassifier *-- ClassificationHandler : owns chain head
-ClassificationHandler ..> ClassificationResult : creates
-
+    TransactionClassifier *-- RuleIndex : Composition
+    TransactionClassifier *-- ClassificationHandler : owns chain head
+    ClassificationHandler ..> ClassificationResult : creates
