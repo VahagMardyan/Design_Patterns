@@ -2,6 +2,7 @@
 
 ## File Structure
 
+```txt
 .
 ├── README.md
 |
@@ -14,3 +15,4 @@
 ├── funny_sorts.py # Not Serious sorting algorithms
 |
 └── binary_search.py
+```
