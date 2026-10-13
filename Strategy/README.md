@@ -2,6 +2,7 @@
 
 ## File Structure
 
+```txt
 .
 ├── README.md
 ├── benchmark.py # Test Bench for testing
@@ -9,3 +10,4 @@
 ├── sorter_strategy.py # Strategy Design pattern
 ├── funny_sorts.py # Not Serious sorting algorithms
 └── binary_search.py
+```
